@@ -92,6 +92,7 @@ if (!empty($_POST)) {
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         #button{
+
             height:30px;
             width:100px;
             color:#66FCF1;
@@ -106,14 +107,16 @@ if (!empty($_POST)) {
         #wrapper{
             background-color:  #1F2833 ;
         }
-
+body{
+    background-color:  #1F2833;
+}
     </style>
 </head>
 <body>
-<header>East Coast Rentals</header><br>
+<header>Register</header><br>
 <div id="wrapper">
     <div id="content">
-        <h2>Register</h2>
+
 
 
         <div id="main">
@@ -158,7 +161,6 @@ if (!empty($_POST)) {
 
             </div>
         </div>
-        <div id='bottom'></div>
     </div>
 </div>
 </body>

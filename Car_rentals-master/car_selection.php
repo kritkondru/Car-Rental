@@ -52,6 +52,9 @@ $allusers = getCar($id);
             background-color:white;
             transition: 2s all;
         }
+        body{
+            background-color:  #1F2833;
+        }
 
     </style>
 </head>

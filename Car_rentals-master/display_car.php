@@ -43,7 +43,9 @@ $allusers = getAllCar();
         td{
             color:#C5C6C7;
         }
-
+ body{
+     background-color:  #1F2833
+ }
     </style>
 </head>
 

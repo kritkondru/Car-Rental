@@ -101,6 +101,9 @@ if (!empty($_POST)) {
             color:#C5C6C7;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
+        body{
+            background-color:  #1F2833;
+        }
 
         .maindiv{
             background-color:  #1F2833 ;
