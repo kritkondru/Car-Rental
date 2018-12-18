@@ -9,12 +9,15 @@ require_once("config.php");
     die();
 }*/
 
+if (isset($_SESSION["ThisUser"])){
+    header("Location: userlogin.php");
+}
+
 //Forms posted
 if (!empty($_POST)) {
     $errors = array();
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
-
     //Perform some validation
 
     if ($username == "") {
@@ -25,6 +28,7 @@ if (!empty($_POST)) {
     }
 
     if (count($errors) == 0) {
+        $_SESSION['username'] = $username;
         //retrieve the records of the user who is trying to login
         $userdetails = fetchUserDetails($username);
 
@@ -52,14 +56,14 @@ if (!empty($_POST)) {
 
                 $firstname = $loggedInUser->first_name;
                 if($firstname=='admin') {
-                    header("Location: http://localhost/Final%20Project/managePage.php");
+                    header("Location: http://localhost/Car_rentals-master1/managePage.php");
                     die();
                 }
                 //pass the values of $loggedInUser into the session -
                 // you can directly pass the values into the array as well.
 
                 $_SESSION["ThisUser"] = $loggedInUser;
-                header("Location: http://localhost/Final%20Project/display_car.php");
+                header("Location: http://localhost/Car_rentals-master1/userlogin.php");
                 //now that a session for this user is created
                 //Redirect to this users account page
                 //header("Location: myaccount.php");
@@ -79,7 +83,7 @@ if (!empty($_POST)) {
     <style>
         header{
             width:100%;
-            height:40px;
+            height:50px;
             color:#45A29E;
             background-color: #1F2833;
             font-size:30px;
@@ -98,23 +102,19 @@ if (!empty($_POST)) {
         p{
             padding-left:20px;
             font-size:20px;
-            color:#C5C6C7;
+            color:black;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
+
         body{
             background-color:  #1F2833;
         }
 
-        .maindiv{
-            background-color:  #1F2833 ;
-        }
+
         .imagediv{
             padding:15px;
         }
 
-        .signinform{
-            color:#66FCF1;
-        }
 
         footer{
             width:100%;
@@ -125,19 +125,14 @@ if (!empty($_POST)) {
             text-align:right;
         }
 
-        #button{
-            height:30px;
-            width:100px;
+
+        #p{
             color:#66FCF1;
-            background-color: black;
-            border-color: black;
         }
-        #button:hover{
-            color:black;
-            background-color:white;
-            transition: 2s all;
-        }
+
     </style>
+    <title>Update Car</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -154,7 +149,7 @@ if (!empty($_POST)) {
         <pre>
 					<?php print_r($errors); ?>
         </pre>
-        <p>Please enter your details to Sign in </p>
+        <p id="p">Please enter your details to Sign in </p>
 
         <div id="regbox" class="signinform">
             <form name="login" action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
@@ -168,7 +163,7 @@ if (!empty($_POST)) {
                 </p>
                 <p>
                     <label>&nbsp;</label>
-                    <input id="button" type="submit" value="Login" class="submit"/>
+                    <input id=button" type="submit" value="Login" class="button"/>
                 </p>
             </form>
 
@@ -176,5 +171,7 @@ if (!empty($_POST)) {
     </div>
 
 </div>
+</div>
+    <footer>&copy East Coast Rentals</footer>
 </body>
 </html>

@@ -11,7 +11,7 @@
 
 include_once("config.php");
 if($_SESSION['ThisUser']== null) {
-   header("Location: http://localhost/Final%20Project/login.php");
+   header("Location: http://localhost/Car_rentals-master1/login.php");
 
 
 
@@ -25,6 +25,7 @@ $allusers = getAllCar();
 <html>
 <head>
     <title>Display Car</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         header{
             width:100%;
@@ -34,24 +35,19 @@ $allusers = getAllCar();
             font-size:30px;
             text-align:center;
         }
-   #table{
-       background-color:  #1F2833 ;
-   }
-        th{
-            color:#66FCF1;;
+        footer{
+            width:100%;
+            height:30px;
+            color:#45A29E;
+            background-color: #1F2833;
+            font-size:20px;
+            text-align:right;
         }
-        td{
-            color:#C5C6C7;
-        }
- body{
-     background-color:  #1F2833
- }
     </style>
 </head>
 
 <body>
-<header>Car Details</header>
-<div id="table">
+<header>Rentals</header><br>
 <table>
     <th>ID</th>
     <th>Car Name</th>
@@ -82,6 +78,6 @@ $allusers = getAllCar();
     <?php } ?>
 
 </table>
-</div>
+<footer>&copy East Coast Rentals</footer>
 </body>
 </html>

@@ -298,7 +298,7 @@ function getCar($id)
 		car_number,
 		company_name,
 		year,
-		availablity,
+		availability,
 		rate,
 		type
 		FROM " . $db_table_prefix . "car_info
@@ -334,7 +334,7 @@ function makeUnavailable($car_number)
     global $mysqli, $db_table_prefix;
     $row=null;
     $stmt = $mysqli->prepare("UPDATE car_info 
-    SET availablity='0' WHERE car_number = ?");
+    SET availability='0' WHERE car_number = ?");
     $stmt->bind_param("s", $car_number);
 
     $stmt->execute();
@@ -438,23 +438,23 @@ function deleteUser($id)
     return $result;
 }
 
-function updateUser($fname, $lname, $city, $zip, $dob, $email, $userid)
+function updateUser($userid,$username, $first_name, $last_name, $email, $password, $active)
 {
     global $mysqli, $db_table_prefix;
     $stmt = $mysqli->prepare(
         "UPDATE " . $db_table_prefix . "userdetails
 		SET
+		UserName = ?,
 		FirstName = ?,
 		LastName = ?,
-		City = ?,
-		Zip = ?,
-		DateOfBirth = ?,
-		EmailAddress = ?
+		Email = ?,
+		Password = ?,
+		Active = ?
 		WHERE
 		userid = ?
 		LIMIT 1"
     );
-    $stmt->bind_param("sssssss", $fname, $lname, $city, $zip, $dob, $email, $userid);
+    $stmt->bind_param("sssssii", $username, $first_name, $last_name, $email, $password, $active, $userid);
     $result = $stmt->execute();
     $stmt->close();
 
@@ -465,11 +465,112 @@ function getUser($userid)
 {
     global $mysqli, $db_table_prefix;
     $stmt = $mysqli->prepare(
-        "Select * from userdetails WHERE userid= ? "
+        "Select 
+        UserName,
+        FirstName,
+        LastName,
+        Email,
+        Password,
+        Active
+        from userdetails WHERE userid= ? "
     );
     $stmt->bind_param("s",  $userid);
     $result = $stmt->execute();
-    $stmt->close();
 
+    $stmt->bind_result(
+        $username,$first_name, $last_name, $email, $password, $active
+    );
+    while($stmt->fetch())
+    {
+        $row[] = array(
+            'userid'=>$userid,
+            'username'=>$username,
+            'first_name'=>$first_name,
+            'last_name'=>$last_name,
+            'email'=>$email,
+            'password'=>$password,
+            'active'=>$active
+        );
+    }
+    $stmt->close();
+    return $row;
+}
+
+function createNewOrder($username, $car_name, $car_number, $company_name, $type, $noOfDays, $paymentName, $cardNumber, $Payment)
+{
+    global $mysqli;
+
+    $stmt = $mysqli->prepare(
+        "INSERT INTO orderhistory (
+		username,
+		carname,
+		carnumber,
+		companyname,
+		cartype,
+		noofdays,
+		paymentname,
+		cardnumber,
+		payment
+		)
+		VALUES (
+		?,
+		?,
+		?,
+		?,
+		?,
+		?,
+		?,
+        ?,
+        ?
+		)"
+    );
+    $stmt->bind_param("sssssssss", $username,$car_name,$car_number,$company_name,$type,$noOfDays,$paymentName,$cardNumber,$Payment);
+    $result = $stmt->execute();
+    $stmt->close();
     return $result;
+
+}
+
+function getUserorders($username)
+{
+    global $mysqli;
+    $stmt = $mysqli->prepare(
+        "
+    SELECT
+    username,
+	carname,
+	carnumber,
+	companyname,
+	cartype,
+	noofdays,
+	paymentname,
+	cardnumber,
+	payment
+
+    FROM orderhistory
+    WHERE
+    username = ?
+    "
+    );
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->bind_result(
+        $username,$car_name,$car_number,$company_name,$type,$noOfDays,$paymentName,$cardNumber,$Payment );
+    $stmt->execute();
+    while ($stmt->fetch()) {
+        $row[] = array(
+            'username'                => $username,
+            'carname'                 => $car_name,
+            'carnumber'               => $car_number,
+            'companyname'             => $company_name,
+            'type'                    => $type,
+            'noofdays'                => $noOfDays,
+            'paymentname'             => $paymentName,
+            'cardnumber'              => $cardNumber,
+            'payment'                 => $Payment
+
+        );
+    }
+    $stmt->close();
+    return ($row);
 }

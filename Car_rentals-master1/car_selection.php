@@ -17,51 +17,34 @@ $id= $_GET["id"];
 $allusers = getCar($id);
 
 ?>
-<pre><?php print_r($allusers); ?></pre>
+
 
 <html>
 <head>
-    <title>Display Car</title>
+    <title>Car Selection</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        header{
-            width:100%;
-            height:40px;
-            color:#45A29E;
+        body{
             background-color: #1F2833;
-            font-size:30px;
-            text-align:center;
         }
-        #table{
-            background-color:  #1F2833 ;
-        }
-        th{
-            color:#66FCF1;;
-        }
-        td{
-            color:#C5C6C7;
-        }
-        #button{
-            height:30px;
-            width:100px;
+        .button{
+            height:50px;
+            width:200px;
             color:#66FCF1;
             background-color: black;
             border-color: black;
         }
-        #button:hover{
+
+
+        .button:hover{
             color:black;
             background-color:white;
             transition: 2s all;
         }
-        body{
-            background-color:  #1F2833;
-        }
-
     </style>
 </head>
 
 <body>
-<header>Rental details</header>
-<div id="table">
 <table>
 
     <?php //NOTICE THE USE OF PHP IN BETWEEN HTML
@@ -93,7 +76,7 @@ $allusers = getCar($id);
                 <td><input type="text" value="<?php echo $company_name ?>" name="company_name" readonly></td>
             </tr><tr>
                 <td><label>Rate Per Day</label></td>
-                <td><input type="text " value="<?php echo $rate?>" name="rate" readonly></td>
+                <td><input type="text" value="<?php echo $rate?>" name="rate" readonly></td>
             </tr>
             <tr>
                 <td> <label>Car Type </label></td>
@@ -107,18 +90,17 @@ $allusers = getCar($id);
                 <td><label>Select Date</label></td>
                 <td><input type="date" ></td>
             </tr>
-            <tr>
 
-                <td><input id="button" type="submit"></td>
-            </tr>
 
         </table>
+        <center><input type="submit" value="SELECT" class="button">
+        <a href="display_car.php"><input type="button" value="Go Back Car List" class="button"></a></center>
+
     </form>
 
 
 
 
 </table>
-</div>
 </body>
 </html>

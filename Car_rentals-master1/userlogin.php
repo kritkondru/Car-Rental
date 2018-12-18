@@ -1,12 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: romit
- * Date: 07-12-2018
- * Time: 14:29
+ * User: jagini
+ * Date: 12/12/2018
+ * Time: 5:14 PM
  */
+include_once("config.php");
+if($_SESSION['ThisUser']== null) {
+    header("Location: http://localhost/Car_rentals-master1/login.php");
+}
 ?>
-
 <html>
 <head>
     <title>
@@ -33,7 +36,16 @@
         }
 
         .maindiv{
-            background-color:  #1F2833 ;
+
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+
+
+        }
+        body {
+            margin: 0;
+            background-color: #1F2833;
         }
 
         .imagediv{
@@ -42,11 +54,13 @@
 
         h1{
             color:#66FCF1;
+            padding: 10px;
         }
-
+        img {padding: 30px}
         p{
-            font-size:20px;
-            color:#C5C6C7;
+            font-size:20px;padding: 15px;
+
+            color: white;
             font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
         footer{
@@ -65,9 +79,11 @@
 <div class="maindiv">
     <div class="imagediv">
         <ul>
-            <a id="a" href="index.php">Home</a>
-            <a id="a" href="display_car.php">Rentals</a>
-            <a id="a" href="login.php">Sign In</a>
+                <a id="a" href="userlogin.php">Home</a>
+                <a id="a" href="display_car.php">Rentals</a>
+                <a id="a" href="orderhistory.php">Order History</a>
+                <a id="a" href="signout.php">SignOut</a>
+
         </ul>
         <img src="http://thumbs4.ebaystatic.com/d/l300/pict/331907223074_1.jpg"></img>
         <img src="https://hips.hearstapps.com/pop.h-cdn.co/assets/cm/15/05/54cb0f3f86c57_-_2015-vw-gti-01-0413-de.jpg"></img>
@@ -80,3 +96,4 @@
 <footer>&copy East Coast Rentals</footer>
 </body>
 </html>
+

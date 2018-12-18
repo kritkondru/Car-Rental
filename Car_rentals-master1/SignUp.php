@@ -1,15 +1,7 @@
 <?php
 
 require_once("config.php");
-//Prevent the user visiting the logged in page if he/she is already logged in
-/*if (isUserLoggedIn()) {
-    header("Location: myaccount.php");
-    die();
-}*/
 
-print_r($_POST);
-
-//Forms posted
 if (!empty($_POST)) {
     $errors = array();
     $email = trim($_POST["email"]);
@@ -54,80 +46,70 @@ if (!empty($_POST)) {
     //End data validation
     if (count($errors) == 0) {
         $user = createNewUser($username, $firstname, $lastname, $email, $password);
-        print_r($user);
+
         if ($user <> 1) {
             $errors[] = "registration error";
         }
     }
     if (count($errors) == 0) {
         $successes[] = "registration successful";
+        header("Location: http://localhost/Car_rentals-master1/login.php");
+        die();
     }
+    else
+        print_r($errors);
 }
 
 //require_once("header.php");
 ?>
 <html>
 <head>
+    <title>Insert New Car</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         header{
             width:100%;
-            height:40px;
+            height:50px;
             color:#45A29E;
             background-color: #1F2833;
             font-size:30px;
             text-align:center;
         }
-        h2{
-            padding-left: 10px;
-            color:#66FCF1;
-            text-decoration:none;
-            font-size:20px;
-            text-align:center;
-        }
-
-        p{
-            padding-left:20px;
-            font-size:20px;
-            color:#C5C6C7;
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-        #button{
-
+        footer{
+            width:100%;
             height:30px;
-            width:100px;
+            color:#45A29E;
+            background-color: #1F2833;
+            font-size:20px;
+            text-align:right;
+        }
+
+        .button{
+            height:50px;
+            width:200px;
             color:#66FCF1;
             background-color: black;
             border-color: black;
         }
-        #button:hover{
+
+
+        .button:hover{
             color:black;
             background-color:white;
             transition: 2s all;
         }
-        #wrapper{
-            background-color:  #1F2833 ;
+        body{
+            background-color: #1F2833;
         }
-body{
-    background-color:  #1F2833;
-}
     </style>
 </head>
+
 <body>
 <header>Register</header><br>
 <div id="wrapper">
     <div id="content">
-
-
-
         <div id="main">
-
-                        <pre>
-                            <?php print_r($errors); ?>
-                            <?php print_r($successes); ?>
-                        </pre>
-
             <div id="regbox">
-
                 <form name="newUser" action="" method="post">
                     <p>
                         <label>User Name:</label>
@@ -153,16 +135,15 @@ body{
                         <label>Email:</label>
                         <input type="text" name="email"/>
                     </p>
-                    <label></label>&nbsp;
-                    <br>
-                    <input id="button" type="submit" value="Register"/>
-                    </p>
+                   <center> <input type="submit" value="SIGN UP" class="button">
+                    <a href="login.php"><input type="button" value="Go Back Login Page" class="button"></a></center>
                 </form>
-
             </div>
         </div>
+
     </div>
 </div>
+<footer>&copy East Coast Rentals</footer>
 </body>
 </html>
 

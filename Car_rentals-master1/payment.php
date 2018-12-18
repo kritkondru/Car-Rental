@@ -16,46 +16,38 @@ $car->noOfDays = $_POST['noOfDays'];
 
 $_SESSION['car'] = $car;
 ?>
-<html>
 <head>
-<style>
-    header{
-        width:100%;
-        height:40px;
-        color:#45A29E;
-        background-color: #1F2833;
-        font-size:30px;
-        text-align:center;
-    }
-    #table{
-        background-color:  #1F2833 ;
-    }
-    th{
-        color:#66FCF1;;
-    }
-    td{
-        color:#C5C6C7;
-    }
-    #button{
-        height:30px;
-        width:100px;
-        color:#66FCF1;
-        background-color: black;
-        border-color: black;
-    }
-    #button:hover{
-        color:black;
-        background-color:white;
-        transition: 2s all;
-    }
-    body{
-        background-color:  #1F2833;
-    }
-</style>
+    <title>Manage User</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+            background-color: #1F2833;
+        }
+        footer{
+            width:100%;
+            height:30px;
+            color:#45A29E;
+            background-color: #1F2833;
+            font-size:20px;
+            text-align:right;
+        }
+        .button{
+            height:50px;
+            width:200px;
+            color:#66FCF1;
+            background-color: black;
+            border-color: black;
+        }
+
+
+        .button:hover{
+            color:black;
+            background-color:white;
+            transition: 2s all;
+        }
+    </style>
 </head>
 <body>
-<header>Payment Details</header>
-<div id="table">
 <form action="FinalPage.php" method="post">
         <table>
             <tr>
@@ -64,7 +56,7 @@ $_SESSION['car'] = $car;
             </tr>
             <tr>
                 <td> <label>Card Number</label></td>
-                <td><input type="number"  name="card_number" ></td>
+                <td><input type="text"  name="card_number" ></td>
             </tr>
             <tr>
                 <td><label>CVV</label></td>
@@ -79,12 +71,10 @@ $_SESSION['car'] = $car;
                 <td> <input type="text" value="<?php echo $car->rate*$car->noOfDays ?>" name="payment" readonly></td>
             </tr>
 
-            <tr>
-                <td><input id="button" type="submit"></td>
-            </tr>
-
         </table>
-    </form>
-</div>
+   <center> <input type="submit" class="button">
+    <a href="managePage.php"><input type="button" value="Go Back Main Menu" class="button"></a></center>
+
+</form>
+<footer>&copy East Coast Rentals</footer>
 </body>
-</html>

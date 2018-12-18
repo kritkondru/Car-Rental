@@ -6,10 +6,17 @@
  * Time: 11:16
  */
 include_once("config.php");
+$username = $_SESSION['username'];
 $car = $_SESSION['car'];
+$car_name = $car->car_name;
+$car_number = $car->car_number;
+$company_name = $car->company_name;
+$type = $car->type;
+$noOfDays = $car->noOfDays;
 $paymentName = $_POST['name'];
 $cardNumber = $_POST['card_number'];
 $Payment = $_POST['payment'];
+$newuser = createNewOrder($username, $car_name, $car_number, $company_name, $type, $noOfDays, $paymentName, $cardNumber, $Payment);
 makeUnavailable($car->car_number);
 ?>
 <html>
@@ -77,7 +84,8 @@ makeUnavailable($car->car_number);
         <ul>
             <a id="a" href="index.php">Home</a>
             <a id="a" href="display_car.php">Rentals</a>
-            <a id="a" href="login.php">Sign In</a>
+            <a id="a" href="orderhistory.php">Order History</a>
+            <a id="a" href="signout.php">Sign Out</a>
         </ul>
         <center><image src=" https://image.spreadshirtmedia.com/image-server/v1/mp/designs/1007217084,width=178,height=178/vroomvroom.png"></image></center>
     </div>
@@ -114,12 +122,11 @@ makeUnavailable($car->car_number);
             <td><label><?php echo $cardNumber ?> </label></td>
         </tr>
         <tr>
-            <td><label>Amount Payed </label></td>
+            <td><label>Amount Paid </label></td>
             <td><label>$<?php echo $Payment ?></label></td>
         </tr>
     </table></center>
 </div>
 <footer>&copy East Coast Rentals</footer>
 </body>
-<?php destroySession('ThisUser') ?>
 </html>
