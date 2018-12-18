@@ -7,3 +7,4 @@
 5.Create a Database called car_rental
 6.Copy paste the SQL queries into the database 
 7.Enjoy the WEbpage
+
